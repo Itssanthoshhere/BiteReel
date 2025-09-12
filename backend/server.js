@@ -1,6 +1,8 @@
 // Start server
 
-// const { connect } = require("mongoose");
+require("dotenv").config();
+console.log("MONGO_URI from env:", process.env.MONGO_URI);
+
 const app = require("./src/app");
 const connectDB = require("./src/db/db");
 
