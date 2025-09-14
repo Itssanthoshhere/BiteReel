@@ -2,7 +2,9 @@ const foodPartnerModel = require("../models/foodpartner.model");
 const userModel = require("../models/user.model");
 const jwt = require("jsonwebtoken");
 
-async function authFoodPartnerMiddleware(req, res, next) {
+async function authFoodPartnerMiddleware(req, res, next) {}
+
+async function authUserMiddleware(req, res, next) {
   const token = req.cookies.token;
 
   if (!token) {
@@ -14,9 +16,9 @@ async function authFoodPartnerMiddleware(req, res, next) {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    const foodPartner = await foodPartnerModel.findById(decoded.id);
+    const user = await userModel.findById(decoded.id);
 
-    req.foodPartner = foodPartner;
+    req.user = user;
 
     next();
   } catch (err) {
@@ -28,4 +30,5 @@ async function authFoodPartnerMiddleware(req, res, next) {
 
 module.exports = {
   authFoodPartnerMiddleware,
+  authUserMiddleware,
 };
