@@ -1,9 +1,29 @@
 import React from "react";
 import "../../styles/auth-shared.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const FoodPartnerLogin = () => {
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    const response = await axios.post(
+      "http://localhost:3000/api/auth/food-partner/login",
+      {
+        email,
+        password,
+      },
+      { withCredentials: true }
+    );
+
+    console.log(response.data);
+
+    navigate("/create-food"); // Redirect to create food page after login
   };
 
   return (
