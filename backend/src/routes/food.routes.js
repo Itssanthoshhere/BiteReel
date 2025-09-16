@@ -12,7 +12,7 @@ const upload = multer({
 router.post(
   "/",
   authMiddleware.authFoodPartnerMiddleware,
-  upload.single("sea-food"),
+  upload.single("food"),
   foodController.createFood
 );
 
