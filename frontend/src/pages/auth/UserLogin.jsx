@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 
 const UserLogin = () => {
   const navigate = useNavigate();
-  const API_BASE = import.meta.env.VITE_API_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -13,18 +12,18 @@ const UserLogin = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    try {
-      const response = await axios.post(
-        `${API_BASE}/api/auth/user/login`,
-        { email, password },
-        { withCredentials: true }
-      );
+    const response = await axios.post(
+      "http://localhost:3000/api/auth/user/login",
+      {
+        email,
+        password,
+      },
+      { withCredentials: true }
+    );
 
-      console.log(response.data);
-      navigate("/"); // Redirect to home after login
-    } catch (error) {
-      console.error("Login failed:", error.response?.data || error.message);
-    }
+    console.log(response.data);
+
+    navigate("/"); // Redirect to home after login
   };
 
   return (
